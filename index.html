@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Replace</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <style>
+        .myClass {
+            background: #FCCD48;
+        }
+    </style>
+
+</head>
+
+<body class="body">
+    <div class="container">
+        <div class="jumbotron clearfix">
+            <div class="formwrap clearfix">
+                <form method="get">
+                    <div class="from-group col-md-4">
+                        <input type="text" class="form-control" id="replace" name="replace" placeholder="Replace">
+                    </div>
+                    <div class="from-group col-md-4">
+                        <input type="text" class="form-control" id="replacewith" placeholder="Replace with">
+                    </div>
+                    <div class="from-group col-md-4">
+                        <button type="button" id="replacebtn" class="btn btn-primary btn-md replacebtn">Replace</button>
+                        <button type="button" id="replaceallbtn" class="btn btn-primary btn-md replaceallbtn">Replace All</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="jumbotron clearfix">
+            <p class="text-justify" id="txt">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae eveniet ad, adipisci Lorem quis ipsum vitae enim aspernatur quas. Laudantium inventore placeat id velit, quis beatae rem, explicabo at Lorem incidunt veniam mollitia facere ea tenetur
+                sed odio et nam, impedit. Rerum reprehenderit culpa, dolor optio libero atque. Libero eaque unde commodi, maiores Lorem dolorum. Amet iste laborum alias iusto ipsa, cumque Lorem temporibus vitae commodi molestiae, quidem sequi, inventore
+                mollitia expedita odit voluptatem quod saepe reiciendis a cum. Nostrum nemo tempore reprehenderit vitae, placeat Lorem qui aperiam, culpa! Culpa quis soluta quam dignissimos dolor corporis provident sequi, ducimus dolorum, eaque, magni,
+                cumque quaerat necessitatibus. Ut necessitatibus eaque et velit rem corporis, quae pariatur laboriosam expedita optio, officiis, in. Est ex modi ipsam Lorem similique itaque Lorem sed, assumenda at. Saepe et, autem facilis quidem laborum
+                adipisci ut quaerat iusto magnam accusantium dolor minus praesentium excepturi.
+            </p>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var rb = document.getElementById("replacebtn");
+        var rab = document.getElementById("replaceallbtn");
+        var r = document.getElementById("replace");
+        var rw = document.getElementById("replacewith");
+
+        rb.addEventListener("click", function() {
+            replacetext(r, rw);
+        });
+
+        function replacetext(r, rw) {
+            var str = document.getElementById("txt");
+            var ri = new RegExp(r.value, "i");
+            var replaced = str.innerHTML.replace(ri, rw.value);
+            str.innerHTML = replaced;
+            hiliter(rw.value, document.getElementById('txt'));
+        }
+
+        rab.addEventListener("click", function() {
+            replacealltext(r, rw);
+        });
+
+        function replacealltext(r, rw) {
+            var stra = document.getElementById("txt");
+            var replace = r.value;
+            var re = new RegExp(replace, "gi");
+            var replacedall = stra.innerHTML.replace(re, rw.value);
+            stra.innerHTML = replacedall;
+
+            hiliter(rw.value, document.getElementById('txt'));
+        }
+
+
+        function hiliter(word, element) {
+            var rgxp = new RegExp("\\b" + word + "\\b", 'gi'); // g modifier for global and i for case insensitive
+            var repl = '<span class="myClass">' + word + '</span>';
+            element.innerHTML = element.innerHTML.replace(rgxp, repl);
+        };
+    </script>
+
+</body>
+
+</html>
